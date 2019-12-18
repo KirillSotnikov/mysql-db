@@ -3,10 +3,10 @@ const Todo = require('../models/todo')
 const router = Router()
 
 // Geet ToDo List
-router.get('/', (req, res) => {
-  res.json({a: 1})
+router.get('/', async (req, res) => {
   try{
-    
+    const todos = await Todo.findAll()
+    res.status(200).json(todos)
   } catch(err) {
     console.log(err)
     res.status(500).json({
