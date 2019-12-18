@@ -80,7 +80,8 @@
                       {{todo.title | capitalize}}
                     </v-list-item-title>
                     <v-list-item-subtitle>
-                      Добавлено в: {{todo.date | date}}
+                      Добавлено в: {{todo.createdAt | date(true)}}
+                      (updated {{todo.updatedAt | date(true)}})
                     </v-list-item-subtitle>
                   </v-list-item-content>
                   <v-btn ripple color="red" @click="removeTodo(todo.id)">
