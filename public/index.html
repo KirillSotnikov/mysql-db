@@ -72,6 +72,7 @@
                     style="border: 3px solid #222;"
                       v-if="!todo.done"
                       v-model="todo.done"
+                      @change='completeTodo(todo.id)'
                       :dark="isDark"
                     ></v-checkbox>
                   </v-list-item-action>

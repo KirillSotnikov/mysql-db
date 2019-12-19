@@ -32,9 +32,13 @@ router.post('/', async (req, res) => {
 })
 
 // Change Some Task
-router.put('/:id', (req, res) => {
+router.put('/:id', async (req, res) => {
   try{
-    
+    const todo = await Todo.findByPk(+req.params.id)
+    todo.done = req.body.done
+
+    await todo.save()
+    res.status(200).json({todo})
   } catch(err) {
     console.log(err)
     res.status(500).json({
@@ -44,9 +48,16 @@ router.put('/:id', (req, res) => {
 })
 
 // Delete Some Task
-router.delete('/:id', (req, res) => {
+router.delete('/:id', async (req, res) => {
   try{
-    
+    const todos = await Todo.findAll({
+      where: {
+        id: +req.params.id
+      }
+    })
+    const todo = todos[0]
+    await todo.destroy()
+    res.status(204).json({})
   } catch(err) {
     console.log(err)
     res.status(500).json({
